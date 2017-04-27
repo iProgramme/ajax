@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>php新用法</title>
+	<style>
+		.box{
+			text-align: center;
+			margin-top: 100px;
+		}
+		ul{
+			list-style: none;
+			text-align: left;
+			padding: 10px;
+		}
+		.info{
+			
+			width: 500px;
+			min-height: 200px;
+			border: 1px solid #000;
+			margin: 50px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<h4>获取学生信息，输入学号或者 all</h4>
+	<h6>( 学号是0-6 )</h6>
+	<input type="text" name="username0">
+	<input type="text" name="username1">
+	<input type="text" name="username2">
+	<button>点击查询</button>
+	<div class="info"></div>
+</div>
+<script>
+var info = document.querySelector('.info');
+var btn = document.querySelector('button');
+var inps = document.querySelectorAll('input');
+
+btn.onclick = function(){
+	var obj = {
+		'username0':inps[0].value,
+		'username1':inps[1].value,
+		'username2':inps[2].value
+	}
+
+	$ajax(obj,'post','05-ajax-test.php',function(a){
+		info.innerHTML = a;
+	});
+	
+}
+
+/**
+ * [$ajax 封装 ajax 函数]
+ * @param  {[object]}   value [要传入多个值时]
+ * @param  {[string]}   get   [传输方式]
+ * @param  {[string]}   url   [处理程序的地址]
+ * @param  {Function} fn    [回调函数]
+ * @return {[Function]}         [将获得的值，传入将要调用的函数中]
+ */
+function $ajax(obj,get,url,fn){
+	var ajax = new XMLHttpRequest();
+	var arr = [];
+	for(var key in obj){
+		arr[arr.length]=key+'='+obj[key]
+	}
+	var values = arr.join('&')
+	console.log(url+'?'+values);
+	if (get=='get') {
+		ajax.open('get',url+'?'+values);
+		ajax.send(null); // 可以没有这个请求主体，因为请求行上有（get的请求头被我省略了）
+	}else if (get=='post') {
+		ajax.open('post',url);
+		ajax.setRequestHeader('content-type','application/x-www-form-urlencoded');
+		ajax.send(values)
+	}
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4&& ajax.status == 200) {
+			var txt = ajax.responseText;
+			return fn(txt)	
+		}
+	}
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>php新用法</title>
+	<style>
+		.box{
+			text-align: center;
+			margin-top: 100px;
+		}
+		ul{
+			list-style: none;
+			text-align: left;
+			padding: 10px;
+		}
+		.info{
+			
+			width: 500px;
+			min-height: 200px;
+			border: 1px solid #000;
+			margin: 50px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<h4>获取学生信息，输入学号或者 all</h4>
+	<h6>( 学号是0-6 )</h6>
+	<input type="text" name="username">
+	<button>点击查询</button>
+	<div class="info"></div>
+</div>
+<script>
+var info = document.querySelector('.info');
+var btn = document.querySelector('button');
+var inp = document.querySelector('input')
+btn.onclick = function(){
+	var inpv = inp.value;
+	var ajax = new XMLHttpRequest();
+	ajax.open('get','03-get-score.php?name='+inpv);
+	ajax.send(null);
+	ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4&& ajax.status == 200) {
+			var txt = ajax.responseText;
+			info.innerHTML = txt;
+			inp.value = ''
+		}
+	}
+}
+
+
+
+// 如果要在三四个位置嵌入动态的数据，是不是需要多个 php文件---------------------------------
+// 尝试写上一个带有class的标签，然后在返回之后，获取该标签然后添加进去
+// 买的网站上面，也有服务器，是否可以自己写后台代码，来实现机器人交流
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

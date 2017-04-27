@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>php新用法</title>
+	<style>
+		.box{
+			text-align: center;
+			margin-top: 100px;
+		}
+		ul{
+			list-style: none;
+		}
+		.info{
+			
+			width: 500px;
+			min-height: 200px;
+			border: 1px solid #000;
+			margin: 50px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<h4>ajax：不刷新页面的情况下，来传输数据 get请求</h4>
+	<input type="text" name="username">
+	<button>点击发送请求</button>
+	<div class="info"></div>
+</div>
+<script>
+var info = document.querySelector('.info');
+var btn = document.querySelector('button');
+btn.onclick= function(){
+
+	// 点击获取值
+	var txt = document.querySelector('input').value;
+
+
+	var xmr = new XMLHttpRequest(); // 创建一个实例对象
+	// 请求行
+	xmr.open('get','02-ajax_get.php?username='+txt); // 由于是get请求，所以直接在此拼接
+	// 请求头
+	xmr.setRequestHeader('content-type','text/html'); // get请求其实可以省略请求头，post不行
+	// xmr.setRequestHeader('content-type','application/x-www-form-urlencoded'); // post 的请求头
+	// 请求主体
+	xmr.send(null) // get方式没有请求主体
+	// xmr.send('username='+txt) // post方式的请求主体
+	// 监听响应状态
+	xmr.onreadystatechange = function(){
+		// 4  服务器处理完成
+		// 200 服务器成功处理了请求
+		if (xmr.readyState==4&&xmr.status==200) {
+			// 获取返回的数据
+			var p = xmr.responseText;
+			info.innerHTML = p;
+		}
+	}
+}
+
+
+
+// 如果要在三四个位置嵌入动态的数据，是不是需要多个 php文件---------------------------------
+// 尝试写上一个带有class的标签，然后在返回之后，获取该标签然后添加进去
+// 买的网站上面，也有服务器，是否可以自己写后台代码，来实现机器人交流
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
