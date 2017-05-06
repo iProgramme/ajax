@@ -9,7 +9,7 @@
 		array('name'=>'人类','Chinese'=>80,'english'=>50,'Math'=>30,'other'=>142),
 		array('name'=>'鬼','Chinese'=>30,'english'=>20,'Math'=>10,'other'=>102)
 		);
-	$value = $_POST['name'];
+	$value = $_GET['name'];
 	if ($value=="all") {
 		for ($i=0; $i < count($names); $i++) {
 ?> 

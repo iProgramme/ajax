@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单序列化</title>
+</head>
+<body>
+	<form action="" accept-charset="utf-8">
+		<input type="text" name="username0" id="">
+		<input type="text" name="username1" id="">
+		<input type="text" name="username2" id="">
+		<input type="text" name="username3" id="">
+		<input type="text" name="username4" id="">
+		<input type="text" name="username5" id="">
+		<input type="text" name="username6" id="">
+		<input type="button" name="" value="提交" class="sub">
+	</form>
+<script src="../jquery-1.12.2.min.js"></script>
+<script>
+	
+	$(".sub").click(function(){
+		var se = $("form").serialize(); // 会自动将数据拼接成 username=asd&password=qwe 这种
+		// 这个也可以直接传到 $.ajax() 里面的 dataType
+		console.log(se)
+	})
+	
+</script>
+	
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试硬币</title>
+</head>
+<body>
+	
+	<script>
+		// 桌子上放有100枚硬币，每个都有正面和反面。其中 10 个正面朝上，90 个反面朝上。你无法通过感觉、视觉或者其他任何方法知道硬币的哪一面朝上。请你把他们分成两堆，每一堆正面朝上的硬币数量必须相同。
+		
+		// 生成100个数,将十个 1 加进去
+		var arr = [],index = 0
+		for (var j = 0; j < 10; j++) {
+			arr[j] = 0
+		}
+		for (var k = 0; k < 4; k++) {
+			var random = Math.floor(Math.random()*10);
+			if (arr[random] == 0) {
+				arr[random] = 1
+			}else{
+				k--
+			}
+			
+		}
+console.log(arr)
+		// 输出看看是不是 十个 1
+		function testNmu(arr){
+			for (var l = 0; l < arr.length; l++) {
+				if (arr[l]==1) {
+					index++
+				}
+			}
+			console.log(index)
+		}
+		
+		
+		// var arr = [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		function fen(array){
+			
+			var arr1 = [] , arr2 = [],a = [];
+			for (var i = 0; i < array.length; i++) {
+				if (i%2==0) {
+					arr1[i/2] = array[i]
+				}else{
+					arr2[(i-1)/2] = array[i]
+				}	
+			}
+			a = arr1.concat(arr2);
+			// console.log(a)
+			return a
+			
+		}
+		for (var i = 0; i < 10000; i++) {
+			arr = fen(arr)
+		}
+		testNmu(arr)
+		
+		console.log(arr)
+	</script>
+</body>
+</html>

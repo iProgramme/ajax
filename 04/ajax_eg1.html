@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单序列化</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		form{
+			margin-top: 100px;
+		}
+		input{
+			display: block;
+			margin: 5px auto;
+			height: 40px;
+			width: 200px;
+			line-height: 40px;
+		}
+		input[type=button]{
+			background-color: #fff;
+			outline: none
+		}
+		.ppp{
+			position: absolute;
+			top: 0;
+			text-align: center;
+			width: 100%;
+			background-color: red;
+			color: #fff;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<form accept-charset="utf-8">
+		<input type="text" name="username0" class="username0" placeholder="用户名">
+		<input type="text" name="username1" class="username1" placeholder="密码">
+		<input type="text" name="username2" class="username2" placeholder="重复密码">
+		<input type="text" name="username3" class="username3" placeholder="手机号">
+		<input type="text" name="username4" class="username4" placeholder="验证码">
+		<input type="button" id="" class="yanzhengma" value="获取验证码">
+		<input type="button" name="" value="提交" class="sub">
+	</form>
+	<div class="ppp"></div>
+<script src="../jquery-1.12.2.min.js"></script>
+<script>
+	
+	$(".sub").click(function(){
+		if ($(this).hasClass('active')) {
+			return false
+		}
+		var str = $("form").serialize();
+		$.ajax({
+			type:'get',
+			url:"ajax_eg1.php",
+			data:str,
+			dataType:'text', // 因为此时的 php 文件只获取一个值，所以不能用 json
+			timeout:10000,
+			beforeSend:function(){
+				// 判断有没有用户名
+				if (!$(".username0").val()) {
+					alert('用户名为空')
+					return false
+				}
+				if ($(".username1").val().length<6) {
+					alert('密码长度需要大于6位')
+					return false
+				}
+				$(".sub").addClass('active').val('正在注册');
+				$(".ppp").text("无语了").fadeIn(500).delay(1000).fadeOut(500)
+			},
+			success:function(info){
+				console.log(info)
+				$(".username2").val(info)
+			},
+			error:function(err){
+				console.log(err)
+			},
+			complete:function(){
+				$(".sub").removeClass('active').val('再次注册')
+			}
+
+		})
+	})
+	
+</script>
+	
+</body>
+</html>

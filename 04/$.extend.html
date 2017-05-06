@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$.extend 拓展</title>
+	<style>
+		input{
+			display: block;
+			margin: 5px auto;
+			height: 40px;
+			width: 200px;
+			line-height: 40px;
+		}
+		input[type=button]{
+			background-color: #fff;
+			outline: none
+		}
+	</style>
+</head>
+<body>
+	
+<script src="../jquery-1.12.2.min.js"></script>
+<script>
+	
+	var bj1 = {
+		name:'啊啊啊',
+		age:18,
+		sex:'男'
+	}
+	var bj2 = {
+		name:"第二个",
+		hobby:'<守塔与反杀>',
+		photo:"没有"
+	}
+	var obj = $.extend(bj1,bj2) // 将两个对象，拓展成一个对象 ： 无则添加，有则覆盖
+	console.log(obj)
+</script>
+	
+</body>
+</html>
